@@ -340,8 +340,8 @@ MyHomePosition = {'px': 0.44, 'py': 0.19, 'pz': 0.45, 'rx': 90, 'ry':0, 'rz': 15
 
 def main():
     global base, vx, vy, vz, grip, recv_time, yemGripper, key_status, key_value, MyHomePosition
-    yemGripper = YemGripper()
-    yemGripper.open()
+    # yemGripper = YemGripper()
+    # yemGripper.open()
     # for cout in range(0,2):
     #     for gripFactor in range(10, -1, -1):
     #         yemGripper.send(gripFactor/10, 0)
@@ -408,9 +408,9 @@ def main():
                         # print(vx, vy, vz, grip)
                         time.sleep(0.1)
                         # grip
-                        # example = GripperCommandExample(base)
-                        # example.ExampleSendGripperCommands(grip)
-                        yemGripper.send(grip)
+                        example = GripperCommandExample(base)
+                        example.ExampleSendGripperCommands(grip)
+                        # yemGripper.send(grip)
 
                     else:
                         success &= example_twist_command(base, 0, 0, 0, 0)
