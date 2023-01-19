@@ -23,6 +23,8 @@ from kortex_api.autogen.client_stubs.BaseCyclicClientRpc import BaseCyclicClient
 
 from kortex_api.autogen.messages import Base_pb2, BaseCyclic_pb2, Common_pb2
 
+import serial
+
 
 
 # Maximum allowed waiting time during actions (in seconds)
@@ -332,6 +334,21 @@ def convert(client, server, message):
     if len(read_array) > 4:
         angular_speed_y = read_array[4]
 
+def moomo_read()
+    global vx, vy, vz, grip, angular_speed_y, recv_time
+    ser = serial.Serial('./serial_out', 9600)
+    while True:
+
+        read_array = np.array(ser.read(5), dtype='int8')
+        recv_time = time.time()
+
+        vx = read_array[2] / 100
+        vy = -read_array[0] / 100
+        vz = read_array[1] / 120
+
+        grip = read_array[3] / 100
+        
+        angular_speed_y = read_array[4]
 
 key_value = ''
 key_status = False
@@ -450,9 +467,11 @@ def key_loop():
 
 
 if __name__ == "__main__":
-    wsserver_run()
+    # wsserver_run()
     #th_key_loop = threading.Thread(target=key_loop)
     #th_key_loop.start()
+    th_momo_read = threading.Thread(target=momo_read)
+    th_momo_read.start()
     try:
         exit(main())
     except:
