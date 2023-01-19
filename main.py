@@ -331,6 +331,8 @@ def convert(client, server, message):
 
     if len(read_array) > 4:
         angular_speed_y = read_array[4]
+
+
 key_value = ''
 key_status = False
 
@@ -429,11 +431,12 @@ def wsserver_run():
     # Called for every client disconnecting
     def client_left(client, server):
         print("Client(%d) disconnected" % client['id'])
-    wsserver = WebsocketServer(port = 9001)
+    wsserver = WebsocketServer(host='192.168.11.32', port = 9001)
     wsserver.set_fn_new_client(new_client)
     wsserver.set_fn_client_left(client_left)
     wsserver.set_fn_message_received(convert)
     wsserver.run_forever(threaded=True)
+    print('hello')
 
 run = True
 def key_loop():
@@ -448,13 +451,13 @@ def key_loop():
 
 if __name__ == "__main__":
     wsserver_run()
-    th_key_loop = threading.Thread(target=key_loop)
-    th_key_loop.start()
+    #th_key_loop = threading.Thread(target=key_loop)
+    #th_key_loop.start()
     try:
         exit(main())
     except:
         print('exit main')
-        yemGripper.close()
+        #yemGripper.close()
         run = False
     else:
         yemGripper.close()
