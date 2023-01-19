@@ -334,7 +334,7 @@ def convert(client, server, message):
     if len(read_array) > 4:
         angular_speed_y = read_array[4]
 
-def moomo_read()
+def moomo_read():
     global vx, vy, vz, grip, angular_speed_y, recv_time
     ser = serial.Serial('./serial_out', 9600)
     while True:
