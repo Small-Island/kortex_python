@@ -338,8 +338,8 @@ def momo_read():
     global vx, vy, vz, grip, angular_speed_y, recv_time
     ser = serial.Serial('./serial_out', 9600)
     while True:
-
-        read_array = np.array(ser.read(5), dtype='int8')
+        data = ser.read(5)
+        read_array = np.array([data[0], data[1], data[2], data[3], data[4]], dtype='int8')
         recv_time = time.time()
 
         vx = read_array[2] / 100
